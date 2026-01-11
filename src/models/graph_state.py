@@ -1,0 +1,43 @@
+"""
+State management for the Refactoring Swarm using LangGraph.
+Defines the shared state that flows between agents.
+"""
+
+from typing import TypedDict, List, Dict, Optional, Annotated
+from operator import add
+
+
+class RefactoringState(TypedDict):
+    """
+    Shared state for the refactoring workflow.
+    This state is passed between all agents in the LangGraph workflow.
+    """
+    # Input/Output
+    target_directory: str  # Directory to refactor
+    python_files: List[str]  # List of Python files found
+    
+    # Analysis results
+    analysis_complete: bool  # Whether analysis is done
+    analysis_report: str  # Report from analyzer
+    issues_found: List[Dict[str, str]]  # List of issues with file, description, severity
+    refactoring_plan: str  # Plan for fixing issues
+    
+    # Fixing results
+    files_modified: Annotated[List[str], add]  # Files that have been modified (accumulate)
+    fix_attempts: int  # Number of fix attempts
+    current_file: Optional[str]  # Current file being fixed
+    fix_report: str  # Report from fixer
+    
+    # Testing results
+    tests_passed: bool  # Whether all tests passed
+    test_report: str  # Report from test runner
+    test_failures: List[Dict[str, str]]  # List of test failures
+    
+    # Control flow
+    iteration: int  # Current iteration number
+    max_iterations: int  # Maximum iterations before stopping
+    should_continue: bool  # Whether to continue the loop
+    final_status: str  # Final status message
+    
+    # Error tracking
+    errors: Annotated[List[str], add]  # Accumulated errors
