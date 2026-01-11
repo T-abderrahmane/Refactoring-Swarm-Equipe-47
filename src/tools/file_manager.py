@@ -77,12 +77,7 @@ class SecureFileManager:
             normalized_path = os.path.abspath(path)
             
             # Use sandbox manager for validation
-            if operation in ["write", "create", "modify", "delete"]:
-                if not self.sandbox_manager.validate_write_path(normalized_path):
-                    raise SecurityViolationError(f"Write access denied to path: {path}")
-            else:
-                if not self.sandbox_manager.validate_read_path(normalized_path):
-                    raise SecurityViolationError(f"Read access denied to path: {path}")
+            self.sandbox_manager.validate_path(normalized_path)
             
             return normalized_path
             
