@@ -1,0 +1,198 @@
+[
+  {
+    "error_type": "RefactoringError",
+    "message": "Workflow execution failed: 'AgentState' object has no attribute 'get'",
+    "severity": "high",
+    "category": "workflow",
+    "recoverable": true,
+    "context": {
+      "phase": "execution",
+      "target_directory": "/tmp/refactoring_test_k4oqapz0/target",
+      "sandbox_directory": "/tmp/refactoring_test_k4oqapz0/sandbox",
+      "critical_operation": true
+    },
+    "timestamp": "2026-01-11T14:08:12.003897"
+  },
+  {
+    "error_type": "RefactoringError",
+    "message": "Workflow execution failed: 'AgentState' object has no attribute 'get'",
+    "severity": "high",
+    "category": "workflow",
+    "recoverable": true,
+    "context": {
+      "phase": "execution",
+      "target_directory": "/tmp/refactoring_test_375o2yw5/target",
+      "sandbox_directory": "/tmp/refactoring_test_375o2yw5/sandbox",
+      "critical_operation": true
+    },
+    "timestamp": "2026-01-11T14:08:12.033222"
+  },
+  {
+    "error_type": "RefactoringError",
+    "message": "Workflow execution failed: 'AgentState' object has no attribute 'get'",
+    "severity": "high",
+    "category": "workflow",
+    "recoverable": true,
+    "context": {
+      "phase": "execution",
+      "target_directory": "/tmp/refactoring_test_9cu_tdgc/target",
+      "sandbox_directory": "/tmp/refactoring_test_9cu_tdgc/sandbox",
+      "critical_operation": true
+    },
+    "timestamp": "2026-01-11T14:08:12.064141"
+  },
+  {
+    "error_type": "RefactoringError",
+    "message": "Workflow execution failed: 'AgentState' object has no attribute 'get'",
+    "severity": "high",
+    "category": "workflow",
+    "recoverable": true,
+    "context": {
+      "phase": "execution",
+      "target_directory": "/tmp/refactoring_test_x0edyxpt/target",
+      "sandbox_directory": "/tmp/refactoring_test_x0edyxpt/sandbox",
+      "critical_operation": true
+    },
+    "timestamp": "2026-01-11T14:08:12.098337"
+  },
+  {
+    "error_type": "RefactoringError",
+    "message": "Workflow execution failed: 'AgentState' object has no attribute 'get'",
+    "severity": "high",
+    "category": "workflow",
+    "recoverable": true,
+    "context": {
+      "phase": "execution",
+      "target_directory": "/tmp/refactoring_test_qqmfpspv/target",
+      "sandbox_directory": "/tmp/refactoring_test_qqmfpspv/sandbox",
+      "critical_operation": true
+    },
+    "timestamp": "2026-01-11T14:08:12.130372"
+  },
+  {
+    "error_type": "RefactoringError",
+    "message": "Workflow execution failed: 'AgentState' object has no attribute 'get'",
+    "severity": "high",
+    "category": "workflow",
+    "recoverable": true,
+    "context": {
+      "phase": "execution",
+      "target_directory": "/tmp/refactoring_test_ilqpcu6i/target",
+      "sandbox_directory": "/tmp/refactoring_test_ilqpcu6i/sandbox",
+      "critical_operation": true
+    },
+    "timestamp": "2026-01-11T14:08:12.161733"
+  },
+  {
+    "error_type": "RefactoringError",
+    "message": "Workflow execution failed: 'AgentState' object has no attribute 'get'",
+    "severity": "high",
+    "category": "workflow",
+    "recoverable": true,
+    "context": {
+      "phase": "execution",
+      "target_directory": "/tmp/refactoring_test_22byox6v/target",
+      "sandbox_directory": "/tmp/refactoring_test_22byox6v/sandbox",
+      "critical_operation": true
+    },
+    "timestamp": "2026-01-11T14:08:12.192175"
+  },
+  {
+    "error_type": "RefactoringError",
+    "message": "Workflow execution failed: 'AgentState' object has no attribute 'get'",
+    "severity": "high",
+    "category": "workflow",
+    "recoverable": true,
+    "context": {
+      "phase": "execution",
+      "target_directory": "/tmp/refactoring_test_fokzduev/target",
+      "sandbox_directory": "/tmp/refactoring_test_fokzduev/sandbox",
+      "critical_operation": true
+    },
+    "timestamp": "2026-01-11T14:08:12.224901"
+  },
+  {
+    "error_type": "RefactoringError",
+    "message": "Workflow execution failed: 'AgentState' object has no attribute 'get'",
+    "severity": "high",
+    "category": "workflow",
+    "recoverable": true,
+    "context": {
+      "phase": "execution",
+      "target_directory": "/tmp/refactoring_test_qx39pwvv/target",
+      "sandbox_directory": "/tmp/refactoring_test_qx39pwvv/sandbox",
+      "critical_operation": true
+    },
+    "timestamp": "2026-01-11T14:08:12.256040"
+  },
+  {
+    "error_type": "RefactoringError",
+    "message": "Workflow execution failed: 'AgentState' object has no attribute 'get'",
+    "severity": "high",
+    "category": "workflow",
+    "recoverable": true,
+    "context": {
+      "phase": "execution",
+      "target_directory": "/tmp/refactoring_test_z_dohmwx/target",
+      "sandbox_directory": "/tmp/refactoring_test_z_dohmwx/sandbox",
+      "critical_operation": true
+    },
+    "timestamp": "2026-01-11T14:08:12.297317"
+  },
+  {
+    "error_type": "RefactoringError",
+    "message": "No Python files found in /tmp/refactoring_test_gpsz0fg3/empty",
+    "severity": "high",
+    "category": "workflow",
+    "recoverable": true,
+    "context": {
+      "phase": "execution",
+      "target_directory": "/tmp/refactoring_test_gpsz0fg3/empty",
+      "sandbox_directory": "/tmp/refactoring_test_gpsz0fg3/sandbox",
+      "critical_operation": true
+    },
+    "timestamp": "2026-01-11T14:08:12.309884"
+  },
+  {
+    "error_type": "RefactoringError",
+    "message": "Workflow execution failed: 'AgentState' object has no attribute 'get'",
+    "severity": "high",
+    "category": "workflow",
+    "recoverable": true,
+    "context": {
+      "phase": "execution",
+      "target_directory": "/tmp/component_test_7z82y9k7/target",
+      "sandbox_directory": "/tmp/component_test_7z82y9k7/target/.refactoring_sandbox",
+      "critical_operation": true
+    },
+    "timestamp": "2026-01-11T14:08:12.349123"
+  },
+  {
+    "error_type": "RefactoringError",
+    "message": "Workflow execution failed: 'AgentState' object has no attribute 'get'",
+    "severity": "high",
+    "category": "workflow",
+    "recoverable": true,
+    "context": {
+      "phase": "execution",
+      "target_directory": "/tmp/orchestration_security_test_nf45c6iq/target",
+      "sandbox_directory": "/tmp/orchestration_security_test_nf45c6iq/target/.refactoring_sandbox",
+      "critical_operation": true
+    },
+    "timestamp": "2026-01-11T14:08:12.434160"
+  },
+  {
+    "error_type": "RefactoringError",
+    "message": "Workflow execution failed: 'AgentState' object has no attribute 'get'",
+    "severity": "high",
+    "category": "workflow",
+    "recoverable": true,
+    "context": {
+      "phase": "execution",
+      "target_directory": "/tmp/orchestration_security_test_x3_4n9y6/target",
+      "sandbox_directory": "/tmp/orchestration_security_test_x3_4n9y6/target/.refactoring_sandbox",
+      "critical_operation": true
+    },
+    "timestamp": "2026-01-11T14:08:12.498007"
+  }
+]

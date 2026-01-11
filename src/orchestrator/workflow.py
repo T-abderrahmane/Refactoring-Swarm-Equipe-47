@@ -153,7 +153,7 @@ class RefactoringWorkflow:
             # Log initialization
             log_experiment(
                 agent_name="Orchestrator",
-                model=self.model,
+                model_used=self.model,
                 action=ActionType.ANALYSIS,
                 details={
                     "input_prompt": "Initializing refactoring workflow",
@@ -223,7 +223,7 @@ class RefactoringWorkflow:
             
             log_experiment(
                 agent_name="Orchestrator",
-                model=self.model,
+                model_used=self.model,
                 action=ActionType.ANALYSIS,
                 details={
                     "input_prompt": "Workflow initialization failed",
@@ -250,7 +250,7 @@ class RefactoringWorkflow:
             
             log_experiment(
                 agent_name="Orchestrator",
-                model=self.model,
+                model_used=self.model,
                 action=ActionType.ANALYSIS,
                 details={
                     "input_prompt": f"Starting audit phase for {len(agent_state.current_files)} files",
@@ -269,7 +269,7 @@ class RefactoringWorkflow:
                     # Log individual file analysis errors but continue
                     log_experiment(
                         agent_name="Orchestrator",
-                        model=self.model,
+                        model_used=self.model,
                         action=ActionType.ANALYSIS,
                         details={
                             "input_prompt": f"Failed to analyze {file_path}",
@@ -299,7 +299,7 @@ class RefactoringWorkflow:
             
             log_experiment(
                 agent_name="Orchestrator",
-                model=self.model,
+                model_used=self.model,
                 action=ActionType.ANALYSIS,
                 details={
                     "input_prompt": "Audit phase completed",
@@ -322,7 +322,7 @@ class RefactoringWorkflow:
             
             log_experiment(
                 agent_name="Orchestrator",
-                model=self.model,
+                model_used=self.model,
                 action=ActionType.ANALYSIS,
                 details={
                     "input_prompt": "Audit phase failed",
@@ -350,7 +350,7 @@ class RefactoringWorkflow:
             
             log_experiment(
                 agent_name="Orchestrator",
-                model=self.model,
+                model_used=self.model,
                 action=ActionType.FIX,
                 details={
                     "input_prompt": f"Starting fix phase - iteration {current_iteration + 1}",
@@ -371,7 +371,7 @@ class RefactoringWorkflow:
                     # Log individual fix errors but continue
                     log_experiment(
                         agent_name="Orchestrator",
-                        model=self.model,
+                        model_used=self.model,
                         action=ActionType.FIX,
                         details={
                             "input_prompt": f"Failed to apply fixes for {plan.file_path}",
@@ -391,7 +391,7 @@ class RefactoringWorkflow:
             
             log_experiment(
                 agent_name="Orchestrator",
-                model=self.model,
+                model_used=self.model,
                 action=ActionType.FIX,
                 details={
                     "input_prompt": "Fix phase completed",
@@ -415,7 +415,7 @@ class RefactoringWorkflow:
             
             log_experiment(
                 agent_name="Orchestrator",
-                model=self.model,
+                model_used=self.model,
                 action=ActionType.FIX,
                 details={
                     "input_prompt": "Fix phase failed",
@@ -442,7 +442,7 @@ class RefactoringWorkflow:
             
             log_experiment(
                 agent_name="Orchestrator",
-                model=self.model,
+                model_used=self.model,
                 action=ActionType.DEBUG,
                 details={
                     "input_prompt": "Starting test phase",
@@ -469,7 +469,7 @@ class RefactoringWorkflow:
             
             log_experiment(
                 agent_name="Orchestrator",
-                model=self.model,
+                model_used=self.model,
                 action=ActionType.DEBUG,
                 details={
                     "input_prompt": "Test phase completed",
@@ -492,7 +492,7 @@ class RefactoringWorkflow:
             
             log_experiment(
                 agent_name="Orchestrator",
-                model=self.model,
+                model_used=self.model,
                 action=ActionType.DEBUG,
                 details={
                     "input_prompt": "Test phase failed",
@@ -526,7 +526,7 @@ class RefactoringWorkflow:
             
             log_experiment(
                 agent_name="Orchestrator",
-                model=self.model,
+                model_used=self.model,
                 action=ActionType.DEBUG,
                 details={
                     "input_prompt": f"Evaluating results - iteration {state['current_iteration']}",
@@ -545,7 +545,7 @@ class RefactoringWorkflow:
                 
                 log_experiment(
                     agent_name="Orchestrator",
-                    model=self.model,
+                    model_used=self.model,
                     action=ActionType.DEBUG,
                     details={
                         "input_prompt": "All tests passed",
@@ -564,7 +564,7 @@ class RefactoringWorkflow:
                 
                 log_experiment(
                     agent_name="Orchestrator",
-                    model=self.model,
+                    model_used=self.model,
                     action=ActionType.DEBUG,
                     details={
                         "input_prompt": "Maximum iterations reached",
@@ -586,7 +586,7 @@ class RefactoringWorkflow:
                     
                     log_experiment(
                         agent_name="Orchestrator",
-                        model=self.model,
+                        model_used=self.model,
                         action=ActionType.DEBUG,
                         details={
                             "input_prompt": f"Continuing to iteration {state['current_iteration'] + 1}",
@@ -609,7 +609,7 @@ class RefactoringWorkflow:
             
             log_experiment(
                 agent_name="Orchestrator",
-                model=self.model,
+                model_used=self.model,
                 action=ActionType.DEBUG,
                 details={
                     "input_prompt": "Evaluation phase failed",
@@ -643,7 +643,7 @@ class RefactoringWorkflow:
                 
                 log_experiment(
                     agent_name="Orchestrator",
-                    model=self.model,
+                    model_used=self.model,
                     action=ActionType.DEBUG,
                     details={
                         "input_prompt": "Generating completion report",
@@ -660,7 +660,7 @@ class RefactoringWorkflow:
                     # Log cleanup error but don't fail the workflow
                     log_experiment(
                         agent_name="Orchestrator",
-                        model=self.model,
+                        model_used=self.model,
                         action=ActionType.DEBUG,
                         details={
                             "input_prompt": "Sandbox cleanup failed",
@@ -682,7 +682,7 @@ class RefactoringWorkflow:
             
             log_experiment(
                 agent_name="Orchestrator",
-                model=self.model,
+                model_used=self.model,
                 action=ActionType.DEBUG,
                 details={
                     "input_prompt": "Workflow finalization",
@@ -698,7 +698,7 @@ class RefactoringWorkflow:
             
             log_experiment(
                 agent_name="Orchestrator",
-                model=self.model,
+                model_used=self.model,
                 action=ActionType.DEBUG,
                 details={
                     "input_prompt": "Workflow finalization failed",
@@ -725,7 +725,7 @@ class RefactoringWorkflow:
             
             log_experiment(
                 agent_name="Orchestrator",
-                model=self.model,
+                model_used=self.model,
                 action=ActionType.DEBUG,
                 details={
                     "input_prompt": f"Handling workflow error (count: {error_count})",
@@ -750,7 +750,7 @@ class RefactoringWorkflow:
                 except Exception as cleanup_error:
                     log_experiment(
                         agent_name="Orchestrator",
-                        model=self.model,
+                        model_used=self.model,
                         action=ActionType.DEBUG,
                         details={
                             "input_prompt": "Error cleanup failed",
@@ -765,7 +765,7 @@ class RefactoringWorkflow:
             # If error handling itself fails, just log and return
             log_experiment(
                 agent_name="Orchestrator",
-                model=self.model,
+                model_used=self.model,
                 action=ActionType.DEBUG,
                 details={
                     "input_prompt": "Error handler failed",

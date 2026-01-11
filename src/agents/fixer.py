@@ -75,7 +75,7 @@ class FixerAgent:
                 action=ActionType.FIX,
                 prompt=f"Starting incremental fixing for {refactoring_plan.file_path}",
                 response=f"Planned {self.current_progress.total_steps} fix steps",
-                model=self.model
+                model_used=self.model
             )
             
             # Read the original file
@@ -138,7 +138,7 @@ class FixerAgent:
                 action=ActionType.FIX,
                 prompt=f"Processing step {step.step_number}: {step.issue.description}",
                 response="Step started",
-                model=self.model
+                model_used=self.model
             )
             
             # Read current file content
@@ -173,7 +173,7 @@ class FixerAgent:
                     action=ActionType.FIX,
                     prompt=f"Step {step.step_number} completed successfully",
                     response=f"Applied fix: {fix_code[:100]}...",
-                    model=self.model
+                    model_used=self.model
                 )
                 
                 return True
@@ -187,7 +187,7 @@ class FixerAgent:
                     action=ActionType.FIX,
                     prompt=f"Step {step.step_number} failed validation",
                     response=error_msg,
-                    model=self.model
+                    model_used=self.model
                 )
                 
                 return False
@@ -202,7 +202,7 @@ class FixerAgent:
                 action=ActionType.FIX,
                 prompt=f"Step {step.step_number} encountered error",
                 response=error_msg,
-                model=self.model
+                model_used=self.model
             )
             
             return False
@@ -242,7 +242,7 @@ class FixerAgent:
                     action=ActionType.FIX,
                     prompt=f"Rolled back step {step_number}",
                     response="Rollback successful",
-                    model=self.model
+                    model_used=self.model
                 )
             
             return success

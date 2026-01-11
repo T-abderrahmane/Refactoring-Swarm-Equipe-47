@@ -180,7 +180,7 @@ class RefactoringOrchestrator:
             # Execute workflow
             log_experiment(
                 agent_name="Orchestrator",
-                model=self.model,
+                model_used=self.model,
                 action=ActionType.ANALYSIS,
                 details={
                     "input_prompt": "Starting workflow execution",
@@ -216,7 +216,7 @@ class RefactoringOrchestrator:
             
             log_experiment(
                 agent_name="Orchestrator",
-                model=self.model,
+                model_used=self.model,
                 action=ActionType.ANALYSIS,
                 details={
                     "input_prompt": "Workflow execution completed",
@@ -230,7 +230,7 @@ class RefactoringOrchestrator:
         except Exception as e:
             log_experiment(
                 agent_name="Orchestrator",
-                model=self.model,
+                model_used=self.model,
                 action=ActionType.ANALYSIS,
                 details={
                     "input_prompt": "Workflow execution failed",
@@ -271,7 +271,7 @@ class RefactoringOrchestrator:
         
         log_experiment(
             agent_name="Orchestrator",
-            model=self.model,
+            model_used=self.model,
             action=ActionType.ANALYSIS,
             details={
                 "input_prompt": f"Created session {session_id}",
@@ -315,7 +315,7 @@ class RefactoringOrchestrator:
             
             log_experiment(
                 agent_name="Orchestrator",
-                model=self.model,
+                model_used=self.model,
                 action=ActionType.ANALYSIS,
                 details={
                     "input_prompt": "Started workflow monitoring",
@@ -372,7 +372,7 @@ class RefactoringOrchestrator:
                     # Log callback errors but don't fail monitoring
                     log_experiment(
                         agent_name="Orchestrator",
-                        model=self.model,
+                        model_used=self.model,
                         action=ActionType.ANALYSIS,
                         details={
                             "input_prompt": "Monitoring callback failed",
@@ -385,7 +385,7 @@ class RefactoringOrchestrator:
             # Log monitoring errors but don't fail execution
             log_experiment(
                 agent_name="Orchestrator",
-                model=self.model,
+                model_used=self.model,
                 action=ActionType.ANALYSIS,
                 details={
                     "input_prompt": "Monitoring update failed",
@@ -670,7 +670,7 @@ class RefactoringOrchestrator:
         
         log_experiment(
             agent_name="Orchestrator",
-            model=self.model,
+            model_used=self.model,
             action=ActionType.ANALYSIS,
             details={
                 "input_prompt": f"Finalized session {self.current_session['session_id']}",
@@ -720,7 +720,7 @@ class RefactoringOrchestrator:
         
         log_experiment(
             agent_name="Orchestrator",
-            model=self.model,
+            model_used=self.model,
             action=ActionType.ANALYSIS,
             details={
                 "input_prompt": "Execution error occurred",
@@ -774,7 +774,7 @@ class RefactoringOrchestrator:
         
         log_experiment(
             agent_name="Orchestrator",
-            model=self.model,
+            model_used=self.model,
             action=ActionType.ANALYSIS,
             details={
                 "input_prompt": "Cleared execution history",

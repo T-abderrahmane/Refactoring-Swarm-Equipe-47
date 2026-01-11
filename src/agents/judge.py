@@ -61,7 +61,7 @@ class JudgeAgent:
             # Log test execution start
             log_experiment(
                 agent_name=self.agent_name,
-                model=self.model,
+                model_used=self.model,
                 action=ActionType.DEBUG,
                 details={
                     "input_prompt": f"Running tests in directory: {test_directory}",
@@ -82,7 +82,7 @@ class JudgeAgent:
             # Log test execution completion
             log_experiment(
                 agent_name=self.agent_name,
-                model=self.model,
+                model_used=self.model,
                 action=ActionType.DEBUG,
                 details={
                     "input_prompt": f"Test execution completed for {test_directory}",
@@ -122,7 +122,7 @@ class JudgeAgent:
             # Log test execution start
             log_experiment(
                 agent_name=self.agent_name,
-                model=self.model,
+                model_used=self.model,
                 action=ActionType.DEBUG,
                 details={
                     "input_prompt": f"Running tests in file: {test_file}",
@@ -143,7 +143,7 @@ class JudgeAgent:
             # Log test execution completion
             log_experiment(
                 agent_name=self.agent_name,
-                model=self.model,
+                model_used=self.model,
                 action=ActionType.DEBUG,
                 details={
                     "input_prompt": f"Test execution completed for {test_file}",
@@ -208,7 +208,7 @@ class JudgeAgent:
             # Log the analysis
             log_experiment(
                 agent_name=self.agent_name,
-                model=self.model,
+                model_used=self.model,
                 action=ActionType.DEBUG,
                 details={
                     "input_prompt": f"Analyzing {test_result.failed_tests} test failures",
@@ -245,7 +245,7 @@ class JudgeAgent:
             # Log feedback generation
             log_experiment(
                 agent_name=self.agent_name,
-                model=self.model,
+                model_used=self.model,
                 action=ActionType.DEBUG,
                 details={
                     "input_prompt": f"Generating feedback for {test_result.failed_tests} failed tests",
@@ -280,7 +280,7 @@ class JudgeAgent:
             # Log validation result
             log_experiment(
                 agent_name=self.agent_name,
-                model=self.model,
+                model_used=self.model,
                 action=ActionType.DEBUG,
                 details={
                     "input_prompt": f"Validating functionality for {code_directory}",
@@ -692,7 +692,7 @@ Format your response as JSON with the following structure:
                 # Log successful completion
                 log_experiment(
                     agent_name=self.agent_name,
-                    model=self.model,
+                    model_used=self.model,
                     action=ActionType.DEBUG,
                     details={
                         "input_prompt": f"Self-healing loop completed successfully after {loop_state['iteration_count']} iterations",
@@ -711,7 +711,7 @@ Format your response as JSON with the following structure:
                 # Log termination due to iteration limit
                 log_experiment(
                     agent_name=self.agent_name,
-                    model=self.model,
+                    model_used=self.model,
                     action=ActionType.DEBUG,
                     details={
                         "input_prompt": f"Self-healing loop terminated after {loop_state['iteration_count']} iterations",
@@ -737,7 +737,7 @@ Format your response as JSON with the following structure:
             # Log iteration completion
             log_experiment(
                 agent_name=self.agent_name,
-                model=self.model,
+                model_used=self.model,
                 action=ActionType.DEBUG,
                 details={
                     "input_prompt": f"Self-healing loop iteration {loop_state['iteration_count']} completed",
@@ -754,7 +754,7 @@ Format your response as JSON with the following structure:
             
             log_experiment(
                 agent_name=self.agent_name,
-                model=self.model,
+                model_used=self.model,
                 action=ActionType.DEBUG,
                 details={
                     "input_prompt": f"Self-healing loop iteration {loop_state['iteration_count']} failed",

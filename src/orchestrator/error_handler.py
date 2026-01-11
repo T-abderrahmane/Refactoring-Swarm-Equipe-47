@@ -418,7 +418,7 @@ class WorkflowErrorHandler:
         """
         log_experiment(
             agent_name="ErrorHandler",
-            model="N/A",
+            model_used="N/A",
             action=ActionType.DEBUG,
             details={
                 "input_prompt": f"Error occurred: {workflow_error.error_type}",
@@ -484,7 +484,7 @@ class WorkflowErrorHandler:
                 if strategy.can_recover(workflow_error, state):
                     log_experiment(
                         agent_name="ErrorHandler",
-                        model="N/A",
+                        model_used="N/A",
                         action=ActionType.DEBUG,
                         details={
                             "input_prompt": f"Attempting recovery with {type(strategy).__name__}",
@@ -504,7 +504,7 @@ class WorkflowErrorHandler:
                 # If recovery strategy fails, log and try next strategy
                 log_experiment(
                     agent_name="ErrorHandler",
-                    model="N/A",
+                    model_used="N/A",
                     action=ActionType.DEBUG,
                     details={
                         "input_prompt": f"Recovery strategy {type(strategy).__name__} failed",
@@ -551,7 +551,7 @@ class WorkflowErrorHandler:
             # If persistence fails, log but don't fail the workflow
             log_experiment(
                 agent_name="ErrorHandler",
-                model="N/A",
+                model_used="N/A",
                 action=ActionType.DEBUG,
                 details={
                     "input_prompt": "State persistence failed",
@@ -656,7 +656,7 @@ class WorkflowErrorHandler:
             
             log_experiment(
                 agent_name="ErrorHandler",
-                model="N/A",
+                model_used="N/A",
                 action=ActionType.DEBUG,
                 details={
                     "input_prompt": f"Recovered from checkpoint: {checkpoint_data['checkpoint_name']}",
@@ -670,7 +670,7 @@ class WorkflowErrorHandler:
         except Exception as recovery_error:
             log_experiment(
                 agent_name="ErrorHandler",
-                model="N/A",
+                model_used="N/A",
                 action=ActionType.DEBUG,
                 details={
                     "input_prompt": "Checkpoint recovery failed",
@@ -690,7 +690,7 @@ class WorkflowErrorHandler:
         try:
             log_experiment(
                 agent_name="ErrorHandler",
-                model="N/A",
+                model_used="N/A",
                 action=ActionType.DEBUG,
                 details={
                     "input_prompt": "Starting graceful cleanup",
@@ -706,7 +706,7 @@ class WorkflowErrorHandler:
                 except Exception as callback_error:
                     log_experiment(
                         agent_name="ErrorHandler",
-                        model="N/A",
+                        model_used="N/A",
                         action=ActionType.DEBUG,
                         details={
                             "input_prompt": "Cleanup callback failed",
@@ -722,7 +722,7 @@ class WorkflowErrorHandler:
                 except Exception as sandbox_error:
                     log_experiment(
                         agent_name="ErrorHandler",
-                        model="N/A",
+                        model_used="N/A",
                         action=ActionType.DEBUG,
                         details={
                             "input_prompt": "Sandbox cleanup failed",
@@ -736,7 +736,7 @@ class WorkflowErrorHandler:
             
             log_experiment(
                 agent_name="ErrorHandler",
-                model="N/A",
+                model_used="N/A",
                 action=ActionType.DEBUG,
                 details={
                     "input_prompt": "Graceful cleanup completed",
@@ -748,7 +748,7 @@ class WorkflowErrorHandler:
         except Exception as cleanup_error:
             log_experiment(
                 agent_name="ErrorHandler",
-                model="N/A",
+                model_used="N/A",
                 action=ActionType.DEBUG,
                 details={
                     "input_prompt": "Graceful cleanup failed",
@@ -813,7 +813,7 @@ class WorkflowErrorHandler:
         
         log_experiment(
             agent_name="ErrorHandler",
-            model="N/A",
+            model_used="N/A",
             action=ActionType.DEBUG,
             details={
                 "input_prompt": "Cleared error history",
