@@ -6,8 +6,7 @@ managing state transitions and conditional routing based on test results.
 """
 
 from typing import Dict, Any, List, Optional, Literal
-from langgraph import StateGraph, END
-from langgraph.graph import Graph
+from langgraph.graph import StateGraph, END
 from langgraph.checkpoint.memory import MemorySaver
 
 from ..models.core import AgentState, AgentStatus, RefactoringPlan, TestResult
@@ -80,7 +79,7 @@ class RefactoringWorkflow:
         self.error_handler = WorkflowErrorHandler()
         
         # Initialize workflow graph
-        self.workflow_graph: Optional[Graph] = None
+        self.workflow_graph: Optional[StateGraph] = None
         self.memory_saver = MemorySaver()
         
         # Workflow configuration
@@ -91,7 +90,7 @@ class RefactoringWorkflow:
             }
         }
     
-    def create_workflow(self) -> Graph:
+    def create_workflow(self) -> StateGraph:
         """
         Create and configure the LangGraph workflow.
         

@@ -88,6 +88,17 @@ class RefactoringPlanner:
         Returns:
             CategorizedIssues object with organized issues
         """
+        log_experiment(
+            agent_name=self.agent_name,
+            model_used=self.model,
+            action=ActionType.ANALYSIS,
+            details={
+                "input_prompt": f"Categorizing {len(issues)} code issues",
+                "output_response": "Issue categorization started"
+            },
+            status="SUCCESS"
+        )
+        
         categorized = CategorizedIssues(
             critical_bugs=[],
             logic_errors=[],
@@ -113,6 +124,18 @@ class RefactoringPlanner:
             else:
                 categorized.maintainability.append(issue)
         
+        category_summary = categorized.get_category_summary()
+        log_experiment(
+            agent_name=self.agent_name,
+            model_used=self.model,
+            action=ActionType.ANALYSIS,
+            details={
+                "input_prompt": f"Issue categorization completed for {len(issues)} issues",
+                "output_response": f"Categories: {category_summary}"
+            },
+            status="SUCCESS"
+        )
+        
         return categorized
     
     def generate_comprehensive_plan(self, file_path: str, 
@@ -129,6 +152,17 @@ class RefactoringPlanner:
         Returns:
             RefactoringPlan with comprehensive details
         """
+        log_experiment(
+            agent_name=self.agent_name,
+            model_used=self.model,
+            action=ActionType.GENERATION,
+            details={
+                "input_prompt": f"Generating comprehensive refactoring plan for {file_path} with {len(issues)} issues, quality score: {quality_score}",
+                "output_response": "Plan generation started"
+            },
+            status="SUCCESS"
+        )
+        
         # Categorize issues
         categorized = self.categorize_issues(issues)
         
@@ -144,6 +178,17 @@ class RefactoringPlanner:
             issues=categorized.get_all_issues(),
             priority=priority,
             estimated_effort=estimated_effort
+        )
+        
+        log_experiment(
+            agent_name=self.agent_name,
+            model_used=self.model,
+            action=ActionType.GENERATION,
+            details={
+                "input_prompt": f"Comprehensive refactoring plan completed for {file_path}",
+                "output_response": f"Generated plan with priority {priority}, effort {estimated_effort}, {len(plan.issues)} issues"
+            },
+            status="SUCCESS"
         )
         
         return plan

@@ -49,23 +49,101 @@ class AuditorAgent:
         Raises:
             AnalysisError: If analysis fails
         """
+        # Log analysis start
+        log_experiment(
+            agent_name=self.agent_name,
+            model_used=self.model,
+            action=ActionType.ANALYSIS,
+            details={
+                "input_prompt": f"Starting file analysis for {file_path}",
+                "output_response": "Analysis initiated"
+            },
+            status="SUCCESS"
+        )
+        
         if not os.path.exists(file_path):
-            raise AnalysisError(f"File not found: {file_path}")
+            error_msg = f"File not found: {file_path}"
+            log_experiment(
+                agent_name=self.agent_name,
+                model_used=self.model,
+                action=ActionType.ANALYSIS,
+                details={
+                    "input_prompt": f"File validation for {file_path}",
+                    "output_response": error_msg
+                },
+                status="FAILURE"
+            )
+            raise AnalysisError(error_msg)
         
         if not file_path.endswith('.py'):
-            raise AnalysisError(f"File is not a Python file: {file_path}")
+            error_msg = f"File is not a Python file: {file_path}"
+            log_experiment(
+                agent_name=self.agent_name,
+                model_used=self.model,
+                action=ActionType.ANALYSIS,
+                details={
+                    "input_prompt": f"File type validation for {file_path}",
+                    "output_response": error_msg
+                },
+                status="FAILURE"
+            )
+            raise AnalysisError(error_msg)
         
         try:
             # Step 1: Run Pylint analysis
+            log_experiment(
+                agent_name=self.agent_name,
+                model_used=self.model,
+                action=ActionType.ANALYSIS,
+                details={
+                    "input_prompt": f"Running Pylint analysis on {file_path}",
+                    "output_response": "Pylint analysis started"
+                },
+                status="SUCCESS"
+            )
+            
             pylint_result = self.pylint_runner.analyze_file(file_path)
+            
+            log_experiment(
+                agent_name=self.agent_name,
+                model_used=self.model,
+                action=ActionType.ANALYSIS,
+                details={
+                    "input_prompt": f"Pylint analysis completed for {file_path}",
+                    "output_response": f"Found {len(pylint_result.issues)} issues, score: {pylint_result.score}"
+                },
+                status="SUCCESS"
+            )
             
             # Step 2: Convert Pylint issues to CodeIssue objects
             code_issues = self._convert_pylint_issues(pylint_result.issues, file_path)
             
             # Step 3: Use LLM to enhance analysis and identify additional issues
             if self.llm_fn:
+                log_experiment(
+                    agent_name=self.agent_name,
+                    model_used=self.model,
+                    action=ActionType.ANALYSIS,
+                    details={
+                        "input_prompt": f"Starting LLM-enhanced analysis for {file_path}",
+                        "output_response": f"Analyzing {len(code_issues)} initial issues"
+                    },
+                    status="SUCCESS"
+                )
+                
                 enhanced_issues = self._enhance_analysis_with_llm(file_path, code_issues)
                 code_issues.extend(enhanced_issues)
+                
+                log_experiment(
+                    agent_name=self.agent_name,
+                    model_used=self.model,
+                    action=ActionType.ANALYSIS,
+                    details={
+                        "input_prompt": f"LLM-enhanced analysis completed for {file_path}",
+                        "output_response": f"Added {len(enhanced_issues)} additional issues, total: {len(code_issues)}"
+                    },
+                    status="SUCCESS"
+                )
             
             # Step 4: Prioritize and categorize issues
             code_issues = self._prioritize_issues(code_issues)
@@ -73,12 +151,35 @@ class AuditorAgent:
             # Step 5: Generate refactoring plan
             plan = self._generate_refactoring_plan(file_path, code_issues, pylint_result.score)
             
+            # Log successful completion
+            log_experiment(
+                agent_name=self.agent_name,
+                model_used=self.model,
+                action=ActionType.ANALYSIS,
+                details={
+                    "input_prompt": f"File analysis completed for {file_path}",
+                    "output_response": f"Generated refactoring plan with {len(plan.issues)} issues, priority: {plan.priority}, effort: {plan.estimated_effort}"
+                },
+                status="SUCCESS"
+            )
+            
             return plan
             
         except AnalysisError:
             raise
         except Exception as e:
-            raise AnalysisError(f"Failed to analyze file {file_path}: {e}")
+            error_msg = f"Failed to analyze file {file_path}: {e}"
+            log_experiment(
+                agent_name=self.agent_name,
+                model_used=self.model,
+                action=ActionType.ANALYSIS,
+                details={
+                    "input_prompt": f"File analysis failed for {file_path}",
+                    "output_response": error_msg
+                },
+                status="FAILURE"
+            )
+            raise AnalysisError(error_msg)
     
     def analyze_directory(self, directory_path: str) -> List[RefactoringPlan]:
         """
@@ -93,26 +194,109 @@ class AuditorAgent:
         Raises:
             AnalysisError: If analysis fails
         """
+        # Log directory analysis start
+        log_experiment(
+            agent_name=self.agent_name,
+            model_used=self.model,
+            action=ActionType.ANALYSIS,
+            details={
+                "input_prompt": f"Starting directory analysis for {directory_path}",
+                "output_response": "Directory analysis initiated"
+            },
+            status="SUCCESS"
+        )
+        
         if not os.path.exists(directory_path):
-            raise AnalysisError(f"Directory not found: {directory_path}")
+            error_msg = f"Directory not found: {directory_path}"
+            log_experiment(
+                agent_name=self.agent_name,
+                model_used=self.model,
+                action=ActionType.ANALYSIS,
+                details={
+                    "input_prompt": f"Directory validation for {directory_path}",
+                    "output_response": error_msg
+                },
+                status="FAILURE"
+            )
+            raise AnalysisError(error_msg)
         
         if not os.path.isdir(directory_path):
-            raise AnalysisError(f"Path is not a directory: {directory_path}")
+            error_msg = f"Path is not a directory: {directory_path}"
+            log_experiment(
+                agent_name=self.agent_name,
+                model_used=self.model,
+                action=ActionType.ANALYSIS,
+                details={
+                    "input_prompt": f"Directory type validation for {directory_path}",
+                    "output_response": error_msg
+                },
+                status="FAILURE"
+            )
+            raise AnalysisError(error_msg)
         
         plans = []
         python_files = self._find_python_files(directory_path)
         
         if not python_files:
-            raise AnalysisError(f"No Python files found in directory: {directory_path}")
+            error_msg = f"No Python files found in directory: {directory_path}"
+            log_experiment(
+                agent_name=self.agent_name,
+                model_used=self.model,
+                action=ActionType.ANALYSIS,
+                details={
+                    "input_prompt": f"Python file discovery in {directory_path}",
+                    "output_response": error_msg
+                },
+                status="FAILURE"
+            )
+            raise AnalysisError(error_msg)
+        
+        log_experiment(
+            agent_name=self.agent_name,
+            model_used=self.model,
+            action=ActionType.ANALYSIS,
+            details={
+                "input_prompt": f"Found {len(python_files)} Python files in {directory_path}",
+                "output_response": f"Files: {', '.join(python_files[:5])}{'...' if len(python_files) > 5 else ''}"
+            },
+            status="SUCCESS"
+        )
+        
+        successful_analyses = 0
+        failed_analyses = 0
         
         for file_path in python_files:
             try:
                 plan = self.analyze_file(file_path)
                 plans.append(plan)
+                successful_analyses += 1
             except AnalysisError as e:
                 # Log error but continue with other files
+                failed_analyses += 1
+                log_experiment(
+                    agent_name=self.agent_name,
+                    model_used=self.model,
+                    action=ActionType.ANALYSIS,
+                    details={
+                        "input_prompt": f"Individual file analysis failed for {file_path}",
+                        "output_response": f"Error: {str(e)}"
+                    },
+                    status="FAILURE"
+                )
                 print(f"Warning: Failed to analyze {file_path}: {e}")
                 continue
+        
+        # Log directory analysis completion
+        log_experiment(
+            agent_name=self.agent_name,
+            model_used=self.model,
+            action=ActionType.ANALYSIS,
+            details={
+                "input_prompt": f"Directory analysis completed for {directory_path}",
+                "output_response": f"Successfully analyzed {successful_analyses}/{len(python_files)} files, {failed_analyses} failures"
+            },
+            status="SUCCESS" if successful_analyses > 0 else "FAILURE"
+        )
         
         return plans
     
@@ -267,6 +451,18 @@ class AuditorAgent:
             # Prepare prompt for LLM
             prompt = self._prepare_llm_analysis_prompt(file_path, file_content, code_issues)
             
+            # Log LLM call start
+            log_experiment(
+                agent_name=self.agent_name,
+                model_used=self.model,
+                action=ActionType.ANALYSIS,
+                details={
+                    "input_prompt": prompt[:500] + "..." if len(prompt) > 500 else prompt,
+                    "output_response": "LLM analysis call initiated"
+                },
+                status="SUCCESS"
+            )
+            
             # Call LLM for enhanced analysis
             response = call_llm(
                 agent_name=self.agent_name,
@@ -279,10 +475,32 @@ class AuditorAgent:
             # Parse LLM response to extract additional issues
             additional_issues = self._parse_llm_analysis_response(response, file_path)
             
+            # Log LLM analysis completion
+            log_experiment(
+                agent_name=self.agent_name,
+                model_used=self.model,
+                action=ActionType.ANALYSIS,
+                details={
+                    "input_prompt": f"LLM analysis response parsing for {file_path}",
+                    "output_response": f"Extracted {len(additional_issues)} additional issues from LLM response"
+                },
+                status="SUCCESS"
+            )
+            
             return additional_issues
             
         except Exception as e:
             # Log error but don't fail - LLM enhancement is optional
+            log_experiment(
+                agent_name=self.agent_name,
+                model_used=self.model,
+                action=ActionType.ANALYSIS,
+                details={
+                    "input_prompt": f"LLM analysis enhancement for {file_path}",
+                    "output_response": f"LLM enhancement failed: {str(e)}"
+                },
+                status="FAILURE"
+            )
             print(f"Warning: LLM analysis enhancement failed: {e}")
             return []
     
