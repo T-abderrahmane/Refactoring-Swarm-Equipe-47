@@ -66,7 +66,7 @@ def read_python_file(file_path: str) -> str:
         with open(safe_path, 'r', encoding='utf-8') as f:
             content = f.read()
         
-        print(f"Read file: {file_path}")
+        print(f"📖 Read file: {file_path}")
         return content
     
     except Exception as e:
@@ -95,7 +95,7 @@ def write_python_file(file_path: str, content: str) -> str:
         with open(safe_path, 'w', encoding='utf-8') as f:
             f.write(content)
         
-        print(f"Wrote file: {file_path}")
+        print(f"✍️  Wrote file: {file_path}")
         return f"Successfully wrote to {file_path}"
     
     except Exception as e:
@@ -132,7 +132,7 @@ def list_python_files(directory: str = ".") -> str:
         if not python_files:
             return "No Python files found in directory"
         
-        print(f"Listed {len(python_files)} Python files in {directory}")
+        print(f"📂 Listed {len(python_files)} Python files in {directory}")
         return "\n".join(sorted(python_files))
     
     except Exception as e:
@@ -166,7 +166,7 @@ def run_pylint(file_path: str) -> str:
         
         output = result.stdout + result.stderr
         
-        print(f"Run pylint on: {file_path}")
+        print(f"🔍 Ran pylint on: {file_path}")
         return output if output else "Pylint completed with no output"
     
     except subprocess.TimeoutExpired:
@@ -207,9 +207,9 @@ def run_pytest(test_path: str = ".") -> str:
         
         # Determine if tests passed
         tests_passed = result.returncode == 0
-        status = "PASSED" if tests_passed else "❌ FAILED"
+        status = "✅ PASSED" if tests_passed else "❌ FAILED"
         
-        print(f"Run pytest on: {test_path} - {status}")
+        print(f"🧪 Ran pytest on: {test_path} - {status}")
         return output if output else "Pytest completed with no output"
     
     except subprocess.TimeoutExpired:
@@ -249,7 +249,7 @@ def get_file_info(file_path: str) -> str:
         info += f"Lines: {lines}\n"
         info += f"Exists: Yes"
         
-        print(f"Got info for: {file_path}")
+        print(f"ℹ️  Got info for: {file_path}")
         return info
     
     except Exception as e:
