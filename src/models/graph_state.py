@@ -3,9 +3,9 @@ State management for the Refactoring Swarm using LangGraph.
 Defines the shared state that flows between agents.
 """
 
+
 from typing import TypedDict, List, Dict, Optional, Annotated
 from operator import add
-
 
 class RefactoringState(TypedDict):
     """

@@ -234,4 +234,4 @@ For issues or questions, please refer to the project documentation in the `docs/
 
 ---
 
-Built with ❤️ using AI Multi-Agent Technology
+Built with ❤️ by team 47
