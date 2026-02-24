@@ -11,6 +11,7 @@ from pathlib import Path
 from dotenv import load_dotenv
 from src.orchestrator.refactoring_workflow import run_refactoring_workflow
 from src.utils.logger import log_llm_interaction, ActionType
+from src.tools.refactoring_tools import set_sandbox_dir
 
 # Load environment variables
 load_dotenv()
@@ -176,12 +177,21 @@ Examples:
     print(f"✅ Found {py_count} Python file(s)\n")
     
     # Setup sandbox (unless --no_copy)
-    if not args.no_copy and args.target_dir != "./sandbox":
+    source_abs = Path(args.target_dir).resolve()
+    sandbox_abs = Path("./sandbox").resolve()
+    is_inside_sandbox = str(source_abs).startswith(str(sandbox_abs))
+    
+    if not args.no_copy and args.target_dir != "./sandbox" and not is_inside_sandbox:
         sandbox_path = setup_sandbox(args.target_dir)
     else:
         sandbox_path = args.target_dir
-        if args.no_copy:
+        if is_inside_sandbox:
+            print(f"📂 Target is inside sandbox, using directly: {args.target_dir}\n")
+        elif args.no_copy:
             print("⚠️  WARNING: Running without sandbox copy - files will be modified in place!\n")
+    
+    # Configure tools to use the correct sandbox directory
+    set_sandbox_dir(sandbox_path)
     
     # Log system startup
     log_llm_interaction(

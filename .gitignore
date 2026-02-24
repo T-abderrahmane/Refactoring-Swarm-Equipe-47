@@ -1,10 +1,8 @@
 # .gitignore
 __pycache__/
 *.pyc
-# .gitignore
-__pycache__/
-*.pyc
 venv/
+env/
 .env
 .DS_Store
 

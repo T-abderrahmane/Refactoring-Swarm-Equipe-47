@@ -14,6 +14,12 @@ from langchain_core.tools import tool
 SANDBOX_DIR = Path("./sandbox")
 
 
+def set_sandbox_dir(path: str):
+    """Set the sandbox directory for file operations."""
+    global SANDBOX_DIR
+    SANDBOX_DIR = Path(path)
+
+
 def ensure_in_sandbox(file_path: str) -> Path:
     """
     Ensure file path is within the sandbox directory for security.
