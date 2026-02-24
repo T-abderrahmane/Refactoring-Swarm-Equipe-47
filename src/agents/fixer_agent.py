@@ -69,8 +69,11 @@ def fixer_node(state: RefactoringState) -> Dict:
     files_modified = []
     fix_reports = []
     
-    # Process each file
+    # Process each file (skip test files — only fix source code)
     for file_path in python_files:
+        if os.path.basename(file_path).startswith("test_"):
+            print(f"\n  • Skipping test file: {file_path}")
+            continue
         print(f"\n  • Processing: {file_path}")
         
         # Read current file content

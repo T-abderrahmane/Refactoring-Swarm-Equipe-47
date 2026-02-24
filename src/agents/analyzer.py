@@ -64,8 +64,13 @@ def analyzer_node(state: RefactoringState) -> Dict:
             "errors": [f"File discovery failed: {files_result}"]
         }
     
-    python_files = [f.strip() for f in files_result.split("\n") if f.strip()]
-    print(f"✅ Found {len(python_files)} Python files")
+    all_files = [f.strip() for f in files_result.split("\n") if f.strip()]
+    # Separate source files from test files — only fix source files
+    python_files = [f for f in all_files if not os.path.basename(f).startswith("test_")]
+    test_files = [f for f in all_files if os.path.basename(f).startswith("test_")]
+    print(f"✅ Found {len(python_files)} source files and {len(test_files)} test files")
+    print(f"   Source files (to fix): {python_files}")
+    print(f"   Test files (read-only): {test_files}")
     
     # Step 2: Run pylint on each file and collect results
     print("\n🔍 Running static analysis (pylint)...")
