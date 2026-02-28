@@ -79,7 +79,7 @@ def fixer_node(state: RefactoringState) -> Dict:
         # Read current file content
         current_content = read_python_file.invoke({"file_path": file_path})
         
-        if "Error" in current_content:
+        if current_content.startswith("Error"):
             print(f"    ❌ Could not read file: {current_content}")
             continue
         

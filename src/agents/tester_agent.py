@@ -94,7 +94,7 @@ def tester_node(state: RefactoringState) -> Dict:
 
         # Read the source file
         source_content = read_python_file.invoke({"file_path": file_path})
-        if "Error" in source_content:
+        if source_content.startswith("Error"):
             print(f"    ❌ Could not read file: {source_content}")
             continue
 
