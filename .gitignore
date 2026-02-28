@@ -11,5 +11,7 @@ sandbox/
 
 # LOGS : On ignore tout le dossier logs...
 logs/*
-# ...SAUF le fichier de données final qu'on veut récupérer
+# ...SAUF les fichiers de données qu'on veut récupérer
 !logs/experiment_data.json
+!logs/code_healers_47_experiment_data_historique.json
+!logs/.gitkeep

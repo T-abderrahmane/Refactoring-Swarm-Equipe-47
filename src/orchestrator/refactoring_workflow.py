@@ -12,6 +12,7 @@ from langgraph.graph import StateGraph, END
 from src.models.graph_state import RefactoringState
 from src.agents.analyzer import analyzer_node
 from src.agents.fixer_agent import fixer_node
+from src.agents.tester_agent import tester_node
 from src.agents.judge_agent import judge_node
 
 
@@ -52,9 +53,10 @@ def create_refactoring_workflow() -> StateGraph:
     The workflow follows this pattern:
     1. START -> Analyzer: Analyze code and create plan
     2. Analyzer -> Fixer: Apply fixes based on plan
-    3. Fixer -> Judge: Run tests and evaluate
-    4. Judge -> Fixer (if tests fail and iterations remain)
-    5. Judge -> END (if tests pass or max iterations reached)
+    3. Fixer -> Tester: Generate missing test scripts
+    4. Tester -> Judge: Run tests and evaluate
+    5. Judge -> Fixer (if tests fail and iterations remain)
+    6. Judge -> END (if tests pass or max iterations reached)
     
     Returns:
         Compiled StateGraph workflow
@@ -65,6 +67,7 @@ def create_refactoring_workflow() -> StateGraph:
     # Add nodes for each agent
     workflow.add_node("analyzer", analyzer_node)
     workflow.add_node("fixer", fixer_node)
+    workflow.add_node("tester", tester_node)
     workflow.add_node("judge", judge_node)
     
     # Define edges (workflow transitions)
@@ -74,8 +77,11 @@ def create_refactoring_workflow() -> StateGraph:
     # Analyzer -> Fixer (always)
     workflow.add_edge("analyzer", "fixer")
     
-    # Fixer -> Judge (always)
-    workflow.add_edge("fixer", "judge")
+    # Fixer -> Tester (always)
+    workflow.add_edge("fixer", "tester")
+    
+    # Tester -> Judge (always)
+    workflow.add_edge("tester", "judge")
     
     # Judge -> Fixer or END (conditional)
     workflow.add_conditional_edges(
@@ -126,6 +132,7 @@ def run_refactoring_workflow(target_directory: str, max_iterations: int = 10):
         "fix_attempts": 0,
         "current_file": None,
         "fix_report": "",
+        "generated_test_files": [],
         "tests_passed": False,
         "test_report": "",
         "test_failures": [],
